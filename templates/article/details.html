@@ -6,17 +6,17 @@
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
                 <div class="text-center mb-5">
-                    <h1 class="fw-bolder">Project Title</h1>
+                    <h1 class="fw-bolder">{{ article.nom }}</h1>
                 </div>
             </div>
         </div>
         <div class="row gx-5">
-            <div class="col-12"><img class="img-fluid rounded-3 mb-5" src="https://dummyimage.com/1300x700/343a40/6c757d" alt="..." /></div>
+            <div class="col-12"><img class="img-fluid rounded-3 mb-5" src="{{ article.image.url }}" alt="..." /></div>
         </div>
         <div class="row gx-5 justify-content-center">
             <div class="col-lg-6">
                 <div class="text-center mb-5">
-                    <p class="lead fw-normal text-muted">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam deserunt architecto enim eos accusantium fugit recusandae illo iste dignissimos possimus facere ducimus odit voluptatibus exercitationem, ex laudantium illum voluptatum corporis.</p>
+                    <p class="lead fw-normal text-muted">{{ article.description }}</p>
                 </div>
             </div>
         </div>
