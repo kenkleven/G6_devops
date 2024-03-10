@@ -7,9 +7,14 @@
       <section class="py-5 bg-light" id="scroll-target">
           <div class="container px-5 my-5">
               <div class="row gx-5 align-items-center">
-                  <div class="col-lg-6"><img class="img-fluid rounded mb-5 mb-lg-0" src="{{ article.image.url }}" alt="{{ article.nom }}" /></div>
                   <div class="col-lg-6">
-                      <h2 class="fw-bolder">{{ article.nom }}</h2>
+                    <img class="img-fluid rounded mb-5 mb-lg-0" src="{{ article.image.url }}" alt="{{ article.nom }}" /></div>
+                  <div class="col-lg-6">
+                      <h2 class="fw-bolder">
+                        <a class="text-decoration-none link-dark stretched-link" href="{% url 'details' article.id %}">
+                          {{article.nom }}
+                        </a>
+                        </h2>
                       <p class="lead fw-normal text-muted mb-0">{{ article.description }}</p>
                   </div>
               </div>
@@ -22,7 +27,11 @@
               <div class="row gx-5 align-items-center">
                   <div class="col-lg-6 order-first order-lg-last"><img class="img-fluid rounded mb-5 mb-lg-0" src="{{ article.image.url }}" alt="{{ article.nom }}" /></div>
                   <div class="col-lg-6">
-                      <h2 class="fw-bolder">{{ article.nom }}</h2>
+                      <h2 class="fw-bolder">
+                        <a class="text-decoration-none link-dark stretched-link" href="{% url 'details' article.id %}">
+                            {{ article.nom }}
+                          </a>
+                    </h2>
                       <p class="lead fw-normal text-muted mb-0">{{ article.description }}</p>
                   </div>
               </div>
