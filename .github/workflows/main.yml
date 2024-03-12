@@ -17,3 +17,9 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Install linters
+      run: pip install flake8
+
+    - name: Analyze code with Flake8
+      run: flake8
+
