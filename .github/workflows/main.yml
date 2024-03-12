@@ -1,0 +1,33 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Check Python code style
+      run: flake8 .
+
+    - name: Run unit tests
+      run: |
+        python manage.py test
+
+    - name: Build Docker image
+      run: docker build -t kenkleven/g6-devops:tag .
+
+    - name: Push Docker image to Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push nom_utilisateur/nom_projet:tag
