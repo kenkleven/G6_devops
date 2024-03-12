@@ -1,6 +1,8 @@
 name: Django CI
 
-on:workflow_dispatch
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
@@ -23,4 +25,9 @@ jobs:
         python manage.py test
 
     - name: Build Docker image
-      run: docker build -t kenkleven/g6_devops:tag .
+      run: docker build -t nom_utilisateur/nom_projet:tag .
+
+    - name: Push Docker image to Docker Hub
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push nom_utilisateur/nom_projet:tag
