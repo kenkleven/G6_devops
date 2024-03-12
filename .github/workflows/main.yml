@@ -24,7 +24,7 @@ jobs:
 
     - name: Run Flake8
       run: |
-        flake8 article
+        flake8 src
 
     - name: Run tests
       run: python manage.py test
