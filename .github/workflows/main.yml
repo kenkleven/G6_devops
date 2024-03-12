@@ -36,7 +36,7 @@ jobs:
       run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
     - name: Push Docker image to Docker Hub
-      run: docker push kenkleven/g6_devops .:latest
+      run: docker push kenkleven/g6_devops:latest
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USER }}  # Store in GitHub Secrets
