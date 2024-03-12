@@ -16,3 +16,4 @@ def details(request, pk):
         "article": article
     }
     return render(request, 'article/details.html', context=context)
+
