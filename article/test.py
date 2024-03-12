@@ -1,24 +1,24 @@
 from django.test import TestCase
 from django.urls import reverse
-from article.models import Categorie, Article
+from .models import Categorie, Article
+from .views import home, details
+from django.core.files.uploadedfile import SimpleUploadedFile
 
-class HomeTestCase(TestCase):
-    def setUp(self):
-        Categorie.objects.create(nom="A la une", status="Active")
-        Article.objects.create(titre="Test", contenu="Contenu du test", categorie=Categorie.objects.get(nom="A la une"))
+def setUp(self):
+    self.categorie = Categorie.objects.create(nom='A la une', status='Active')
+    image = SimpleUploadedFile("test_image.jpg", b"file_content", content_type="image/jpeg")
+    self.article = Article.objects.create(nom='Mon article', description='Description de l\'article', status='Actif', categorie=self.categorie, image=image)
 
-    def test_home(self):
-        response = self.client.get(reverse('home'))
+    def test_home_view(self):
+        response = self.client.get(reverse('accueil'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home.html')
-        self.assertEqual(len(response.context['categories']), 1)
+        self.assertTemplateUsed(response, 'article/index.html')
+        self.assertContains(response, 'A la une')
+        self.assertContains(response, 'Mon article')
 
-class DetailsTestCase(TestCase):
-    def setUp(self):
-        Categorie.objects.create(nom="A la une", status="Active")
-        Article.objects.create(titre="Test", contenu="Contenu du test", categorie=Categorie.objects.get(nom="A la une"))
-
-    def test_details(self):
-        response = details(None, 1)
+    def test_details_view(self):
+        response = self.client.get(reverse('details', kwargs={'pk': self.article.pk}))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['article'].titre, "Test")
+        self.assertTemplateUsed(response, 'article/details.html')
+        self.assertContains(response, 'Mon article')
+        self.assertContains(response, 'Description de l\'article')
